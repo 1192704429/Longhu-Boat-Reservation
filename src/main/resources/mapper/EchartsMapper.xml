@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lake.booking.basic.mapper.EchartsMapper">
+
+    <select id="getBoatTypeStatistics" resultType="com.lake.booking.vo.EchartsDataVO">
+        SELECT CASE b.boat_type WHEN 1 THEN '小型游船' WHEN 2 THEN '中型游船' WHEN 3 THEN '大型游船' END AS name, COUNT(*) AS value FROM boat b <if test="status != null and status != -1">WHERE b.status = #{status}</if> GROUP BY b.boat_type
+    </select>
+
+    <select id="getBoatOrderStatusStatistics" resultType="com.lake.booking.vo.EchartsDataVO">
+        SELECT CASE o.status WHEN 0 THEN '待确认' WHEN 1 THEN '已确认' WHEN 2 THEN '已取消' WHEN 3 THEN '已完成' END AS name, COUNT(*) AS value FROM boat_order o <if test="startTime != null and startTime != ''">WHERE o.create_time &gt;= #{startTime}</if> <if test="endTime != null and endTime != ''">AND o.create_time &lt;= #{endTime}</if> GROUP BY o.status
+    </select>
+
+    <select id="getBoatCommentScoreStatistics" resultType="com.lake.booking.vo.EchartsDataVO">
+        SELECT CASE c.score WHEN 1 THEN '一星' WHEN 2 THEN '二星' WHEN 3 THEN '三星' WHEN 4 THEN '四星' WHEN 5 THEN '五星' END AS name, COUNT(*) AS value FROM order_comment c <if test="auditStatus != null and auditStatus != -1">WHERE c.audit_status = #{auditStatus}</if> GROUP BY c.score
+    </select>
+
+    <select id="getBoatDailyOrderTrend" resultType="com.lake.booking.vo.EchartsDataVO">
+        SELECT
+            DATE_FORMAT(o.appoint_date, '%Y-%m-%d') AS name,
+            COUNT(*) AS value
+        FROM boat_order o
+        <where>
+            <if test="startDate != null and startDate != ''">
+                AND DATE(o.appoint_date) &gt;= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                AND DATE(o.appoint_date) &lt;= #{endDate}
+            </if>
+        </where>
+        GROUP BY DATE_FORMAT(o.appoint_date, '%Y-%m-%d')
+        ORDER BY DATE_FORMAT(o.appoint_date, '%Y-%m-%d')
+    </select>
+
+    <select id="getBoatSeatCountDistribution" resultType="com.lake.booking.vo.EchartsDataVO">
+        SELECT CASE WHEN b.seat_count &lt; 20 THEN '20座以下' WHEN b.seat_count &gt;=20 AND b.seat_count &lt;=50 THEN '20-50座' WHEN b.seat_count &gt;50 AND b.seat_count &lt;=100 THEN '50-100座' ELSE '100座以上' END AS name, COUNT(*) AS value FROM boat b <if test="boatType != null and boatType != -1">WHERE b.boat_type = #{boatType}</if> GROUP BY CASE WHEN b.seat_count &lt; 20 THEN '20座以下' WHEN b.seat_count &gt;=20 AND b.seat_count &lt;=50 THEN '20-50座' WHEN b.seat_count &gt;50 AND b.seat_count &lt;=100 THEN '50-100座' ELSE '100座以上' END
+    </select>
+
+    <select id="getBoatOrderUserCount" resultType="com.lake.booking.vo.EchartsDataVO">
+        SELECT u.username AS name, COUNT(o.id) AS value FROM boat_order o LEFT JOIN user u ON o.user_id = u.id <if test="startTime != null and startTime != ''">WHERE o.create_time &gt;= #{startTime}</if> <if test="endTime != null and endTime != ''">AND o.create_time &lt;= #{endTime}</if> GROUP BY u.username ORDER BY COUNT(o.id) DESC LIMIT 10
+    </select>
+
+</mapper>

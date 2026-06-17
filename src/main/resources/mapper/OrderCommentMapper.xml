@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lake.booking.module.order_comment.mapper.OrderCommentMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND orderComment.id = #{entity.id}
+            </if>
+            <if test="entity.boatId != null">
+                AND orderComment.boat_id = #{entity.boatId}
+            </if>
+            <if test="entity.score != null">
+                AND orderComment.score = #{entity.score}
+            </if>
+            <if test="entity.auditStatus != null">
+                AND orderComment.audit_status = #{entity.auditStatus}
+            </if>
+            <if test="entity.orderNo != null and entity.orderNo != ''">
+                AND boatOrder.order_no LIKE CONCAT('%', #{entity.orderNo}, '%')
+            </if>
+            <if test="entity.username != null and entity.username != ''">
+                AND user.username LIKE CONCAT('%', #{entity.username}, '%')
+            </if>
+            <if test="entity.boatName != null and entity.boatName != ''">
+                AND boat.boat_name LIKE CONCAT('%', #{entity.boatName}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.lake.booking.module.order_comment.entity.OrderComment">
+        SELECT orderComment.*
+        , boatOrder.order_no AS orderNo
+        , user.username AS username
+        , user.avatar AS userAvatar
+        , boat.boat_name AS boatName
+        FROM order_comment orderComment
+        LEFT JOIN boat_order boatOrder ON orderComment.order_id = boatOrder.id
+        LEFT JOIN user user ON orderComment.user_id = user.id
+        LEFT JOIN boat boat ON orderComment.boat_id = boat.id
+        <include refid="whereCondition"/>
+        ORDER BY orderComment.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM order_comment orderComment
+        LEFT JOIN boat_order boatOrder ON orderComment.order_id = boatOrder.id
+        LEFT JOIN user user ON orderComment.user_id = user.id
+        LEFT JOIN boat boat ON orderComment.boat_id = boat.id
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.lake.booking.module.order_comment.entity.OrderComment">
+        SELECT orderComment.*
+        , boatOrder.order_no AS orderNo
+        , user.username AS username
+        , user.avatar AS userAvatar
+        , boat.boat_name AS boatName
+        FROM order_comment orderComment
+        LEFT JOIN boat_order boatOrder ON orderComment.order_id = boatOrder.id
+        LEFT JOIN user user ON orderComment.user_id = user.id
+        LEFT JOIN boat boat ON orderComment.boat_id = boat.id
+        <include refid="whereCondition"/>
+        ORDER BY orderComment.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.lake.booking.module.order_comment.entity.OrderComment">
+        SELECT orderComment.*
+        , boatOrder.order_no AS orderNo
+        , user.username AS username
+        , user.avatar AS userAvatar
+        , boat.boat_name AS boatName
+        FROM order_comment orderComment
+        LEFT JOIN boat_order boatOrder ON orderComment.order_id = boatOrder.id
+        LEFT JOIN user user ON orderComment.user_id = user.id
+        LEFT JOIN boat boat ON orderComment.boat_id = boat.id
+        WHERE orderComment.id = #{id}
+    </select>
+
+</mapper>

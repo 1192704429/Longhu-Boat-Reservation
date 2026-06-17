@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lake.booking.module.boat_order.mapper.BoatOrderMapper">
+
+    <sql id="whereCondition">
+        <where>
+            <if test="entity.id != null">
+                AND boatOrder.id = #{entity.id}
+            </if>
+            <if test="entity.orderNo != null and entity.orderNo != ''">
+                AND boatOrder.order_no LIKE CONCAT('%', #{entity.orderNo}, '%')
+            </if>
+            <if test="entity.userId != null">
+                AND boatOrder.user_id = #{entity.userId}
+            </if>
+            <if test="entity.appointDateStart != null and entity.appointDateEnd != null">
+                AND boatOrder.appoint_date BETWEEN #{entity.appointDateStart} AND #{entity.appointDateEnd}
+            </if>
+            <if test="entity.status != null">
+                AND boatOrder.status = #{entity.status}
+            </if>
+            <if test="entity.username != null and entity.username != ''">
+                AND user.username LIKE CONCAT('%', #{entity.username}, '%')
+            </if>
+            <if test="entity.boatName != null and entity.boatName != ''">
+                AND boat.boat_name LIKE CONCAT('%', #{entity.boatName}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="pageQuery" resultType="com.lake.booking.module.boat_order.entity.BoatOrder">
+        SELECT boatOrder.*
+        , user.username AS username
+        , boat.boat_name AS boatName
+        , boatTimeConfig.appoint_time AS appointTime2
+        FROM boat_order boatOrder
+        LEFT JOIN user user ON boatOrder.user_id = user.id
+        LEFT JOIN boat boat ON boatOrder.boat_id = boat.id
+        LEFT JOIN boat_time_config boatTimeConfig ON boatOrder.time_config_id = boatTimeConfig.id
+        <include refid="whereCondition"/>
+        ORDER BY boatOrder.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="countQuery" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM boat_order boatOrder
+        LEFT JOIN user user ON boatOrder.user_id = user.id
+        LEFT JOIN boat boat ON boatOrder.boat_id = boat.id
+        LEFT JOIN boat_time_config boatTimeConfig ON boatOrder.time_config_id = boatTimeConfig.id
+        <include refid="whereCondition"/>
+    </select>
+
+    <!-- 列表查询（不分页） -->
+    <select id="listQuery" resultType="com.lake.booking.module.boat_order.entity.BoatOrder">
+        SELECT boatOrder.*
+        , user.username AS username
+        , boat.boat_name AS boatName
+        , boatTimeConfig.appoint_time AS appointTime2
+        FROM boat_order boatOrder
+        LEFT JOIN user user ON boatOrder.user_id = user.id
+        LEFT JOIN boat boat ON boatOrder.boat_id = boat.id
+        LEFT JOIN boat_time_config boatTimeConfig ON boatOrder.time_config_id = boatTimeConfig.id
+        <include refid="whereCondition"/>
+        ORDER BY boatOrder.create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" resultType="com.lake.booking.module.boat_order.entity.BoatOrder">
+        SELECT boatOrder.*
+        , user.username AS username
+        , boat.boat_name AS boatName
+        , boatTimeConfig.appoint_time AS appointTime2
+        FROM boat_order boatOrder
+        LEFT JOIN user user ON boatOrder.user_id = user.id
+        LEFT JOIN boat boat ON boatOrder.boat_id = boat.id
+        LEFT JOIN boat_time_config boatTimeConfig ON boatOrder.time_config_id = boatTimeConfig.id
+        WHERE boatOrder.id = #{id}
+    </select>
+
+</mapper>
