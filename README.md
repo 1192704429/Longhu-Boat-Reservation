@@ -16,7 +16,7 @@
 | 管理员端 | 管理员 | 用户管理、游船信息管理、预约时间管理、订单管理、评价管理 |
 
 
-![功能模块图](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/azhou_promotion/img/module_structure/func_module_c7154306001c4e00b3e66a27015c2f4d.png)
+![功能模块图](docs/images/01-func-module.png)
 
 
 ## 三、技术栈说明
@@ -52,27 +52,27 @@
 
 登录页：用户可在此登录或注册游船预约系统账号
 
-![登录页：用户可在此登录或注册游船预约系统账号](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/9110da9b-7012-46c9-8ce8-d318135bb75a.jpg)
+![登录页：用户可在此登录或注册游船预约系统账号](docs/images/02-deng-lu.png)
 
 注册页：填写信息完成龙湖游船预约系统账户注册
 
-![注册页：填写信息完成龙湖游船预约系统账户注册](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/4e8f068d-23ba-403b-8c86-e1a4e0d868e0.jpg)
+![注册页：填写信息完成龙湖游船预约系统账户注册](docs/images/03-zhu-ce.png)
 
 游船列表页：展示游船列表，可搜索、查看详情和在线预约
 
-![游船列表页：展示游船列表，可搜索、查看详情和在线预约](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/72e36dd5-b029-47f9-8e48-a1fbed1b2939.jpg)
+![游船列表页：展示游船列表，可搜索、查看详情和在线预约](docs/images/04-you-chuan-lie-biao.png)
 
 游船信息详情页：展示游船详情，支持用户预约该游船
 
-![游船信息详情页：展示游船详情，支持用户预约该游船](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/e2d1f534-607d-4ab1-83e0-6c04b7306bda.jpg)
+![游船信息详情页：展示游船详情，支持用户预约该游船](docs/images/05-you-chuan-xin-xi-xiang-qing.png)
 
 个人信息页：修改个人信息密码，管理个人预约订单
 
-![个人信息页：修改个人信息密码，管理个人预约订单](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/6be4b05f-03c2-4777-8f34-1b19aebc63da.jpg)
+![个人信息页：修改个人信息密码，管理个人预约订单](docs/images/06-ge-ren-xin-xi.png)
 
 客服中心页：展示客服信息、常见问题和平台服务保障内容
 
-![客服中心页：展示客服信息、常见问题和平台服务保障内容](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/a39dfa6c-62ec-42b3-8289-fba076559d84.jpg)
+![客服中心页：展示客服信息、常见问题和平台服务保障内容](docs/images/07-ke-fu-zhong-xin.png)
 
 
 ###### 管理员端
@@ -97,35 +97,35 @@
 
 系统首页：展示游船预约系统各类业务数据统计
 
-![系统首页：展示游船预约系统各类业务数据统计](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/180abe52-3b49-4547-8d5c-66f626205eec.jpg)
+![系统首页：展示游船预约系统各类业务数据统计](docs/images/08-xi-tong-shou.png)
 
 登录页：管理员输入信息登录龙湖游船预约系统
 
-![登录页：管理员输入信息登录龙湖游船预约系统](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/34d0caba-0f93-4dd6-8167-29044f894455.jpg)
+![登录页：管理员输入信息登录龙湖游船预约系统](docs/images/09-deng-lu.png)
 
 用户管理页：管理员查询和管理系统内的用户信息
 
-![用户管理页：管理员查询和管理系统内的用户信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/ef14b987-f650-4589-881a-67c25a8d9c12.jpg)
+![用户管理页：管理员查询和管理系统内的用户信息](docs/images/10-yong-hu-guan-li.png)
 
 游船信息管理页：管理员查看和管理系统内所有游船的信息
 
-![游船信息管理页：管理员查看和管理系统内所有游船的信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/a8d7264d-64de-4a61-8929-963eb1cfb7a5.jpg)
+![游船信息管理页：管理员查看和管理系统内所有游船的信息](docs/images/11-you-chuan-xin-xi-guan-li.png)
 
 预约时间管理页：管理游船可预约时间与可预约数量信息
 
-![预约时间管理页：管理游船可预约时间与可预约数量信息](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/1994ba02-2b7b-408c-8957-6e3c7b59b9d4.jpg)
+![预约时间管理页：管理游船可预约时间与可预约数量信息](docs/images/12-yu-yue-shi-jian-guan-li.png)
 
 订单管理页：查看所有预约订单，对异常订单进行人工处理
 
-![订单管理页：查看所有预约订单，对异常订单进行人工处理](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/7c3ad8fc-6b80-476b-8a3e-6d274e17768c.jpg)
+![订单管理页：查看所有预约订单，对异常订单进行人工处理](docs/images/13-ding-dan-guan-li.png)
 
 评价管理页：审核管理用户提交的游船评价
 
-![评价管理页：审核管理用户提交的游船评价](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/e996fc4e-d6ed-4722-8a43-dbf28a835cc6.jpg)
+![评价管理页：审核管理用户提交的游船评价](docs/images/14-ping-jia-guan-li.png)
 
 客服管理页：展示并管理客服联系信息，支持增删改操作
 
-![客服管理页：展示并管理客服联系信息，支持增删改操作](https://code-graden-server-dev.oss-cn-beijing.aliyuncs.com/2026-06-15/19fe03df-4b17-41c8-8e0a-c4f971aae420.jpg)
+![客服管理页：展示并管理客服联系信息，支持增删改操作](docs/images/15-ke-fu-guan-li.png)
 
 
 ## 五、主要业务流程
